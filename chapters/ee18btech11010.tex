@@ -1,0 +1,166 @@
+\begin{enumerate}[label=\thesection.\arabic*.,ref=\thesection.\theenumi]
+\numberwithin{equation}{enumi} 
+\item 
+The Transfer function of Phase Lead Compensator is given by \\
+
+\begin{align}
+D(s) = \frac{3(s+\frac{1}{3T})}{(s+\frac{1}{T})}
+\end{align}
+
+Find out the frequency (in rad/sec), at which $\angle D(j\omega)$ is maximum? \\
+\label{prob:ee18btech11010_comp}
+\solution
+The basic requirement of the phase lead network is that all poles and zeros
+of the transfer function of the network must lie on negative real axis
+interlacing each other with a zero located as the nearest point to origin.
+
+Substituting $s = j\omega$ in D(s), we get \\
+
+\begin{align}
+D(j\omega) = \frac{3(j\omega+\frac{1}{3T})}{(j\omega+\frac{1}{T})}
+\end{align}
+
+The phase of this transfer function $\phi(\omega)$ is given by,
+\begin{align}
+\phi(\omega) = \tan^{-1}(3\omega T)-\tan^{-1}(\omega T)
+\end{align}
+
+$\phi(\omega)$ has its maximum at $\omega_c$ Where $\phi '(\omega_c)=0$,
+
+\begin{align}
+\phi '(\omega_c) = 0 = \frac{3T}{1+(3\omega _c T)^2}-\frac{T}{1+(\omega _c T)^2}
+\end{align}
+
+After solving and Simplification , we have \\
+
+\begin{align}
+\omega _c ^2T^2 = \frac{1}{3}
+\end{align}
+
+\begin{align}
+\omega _c = \sqrt{\frac{1}{3T^2}}
+\end{align}
+
+\item Verify your result through a plot.
+\\
+\solution 
+The following plots the Phase value of the transfer function, 
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=\columnwidth]{./figs/ee18btech11010.eps}
+	\caption{}
+	\label{fig:ee18btech11010}
+\end{figure}
+ 
+\textbf{Applications:}\\ \\
+\begin{enumerate}
+  \item Phase lead Compensators can be used as High pass filters,Differentiators.
+  \item They are used to reduce steady state errors. 
+  \item Increases Phase Margin , relative stability.
+\end{enumerate}
+\item What is purpose of of a Phase Lead Compensator? \\
+
+\solution
+ \begin{enumerate}
+\item To increase $K_v$ of a system.
+\item The slope of the magnitude plot reduces at the gain crossover frequency so that relative stability improves and error decrease due to error is directly proportional to the slope.
+\item To increase Phase margin. 
+\item To increase the response/speed become as it shifts the gain crossover frequency to a higher value.
+\item To decrease the maximum overshoot of the system
+
+\end{enumerate}
+
+
+\item Through an example, show how the compensator in Problem \ref{prob:ee18btech11010_comp} can be used in a control system. \\
+\solution
+
+Consider the following :- \\
+
+ Open loop system $G(s)=\frac{4}{(s)(s+2)}$. Our aim is to cascade this with a phase lead compensator $G_c(s)$ such that we can meet the following performance requirements-  \\
+
+\textbf{Performance requirements for the system:}\\ \\ 
+  Steady State:  $K_v$ = \[\lim_{s \to 0} sG(s) = 20 \] \\
+  Transient Response: 	$Phase Margin$ $>$ 50$^{\circ}$  \\
+			$Gain Margin$ $>$ 10dB \\
+
+\textbf{Analysis of the system with $G_c(s)$ = K yields the following }\\ \\
+   For $K_v = 20$ , $K$ = 10 \\
+   This leads to: $ Phase margin$ $\approx$ 17$^{\circ}$  \\
+                  $ Gain margin$ $\approx$ +$\infty$ dB  \\
+
+\textbf{Design of the lead Compensator:  }\\ \\
+Let the Phase lead Compensator be of the form  \\
+\begin{align}
+G_c(s) = (K_c)(a)\frac{(1+Ts)}{(1+aTS)}
+\end{align}
+ 
+\begin{enumerate}
+  \item From $K_v$ = 20 ,$K_v = \frac{4aK_c}{2}$  $\to$ $ aK_c = 10$\\
+  \item From the Analysis of the system with $G_c(s) = aK_c$ we obtain the additional phase-lead required is: 50\degree $-$ 17\degree $\approx$ 33\degree . We choose lead as 38\degree ($\approx$ 15$\%$ more than 33\degree ) \\
+  \item Let $\phi(\omega_m)$ be the maximum phase of $G_c (s)$. After some calculations we arive at the relation \\
+    $sin\phi(\omega_m) = \frac{(1-a)}{(1+a)}$ \\
+   Substituting $\phi(\omega_m)$ = 38\degree in the above relation , we get the value of $a$ = 0.24 \\
+  \item Substituting  $\omega_m$ ,  the frequency with the maximum phase lead angle  and calculating the Magnitude of the Feed Forward Transfer function , we get \\            
+  
+   $\abs{G{(j\omega_{m})}}$ = $aK_c\abs{\frac{1+jT\omega_m}{{ 1 + jaT\omega_m}}}$ = $aK_c\frac{1}{\sqrt{a}}$ \\
+ We choose $\omega_c$ , the new gain crossover frequency so that $\omega_c$ = $\omega_m$ and \\
+ $\abs{G{(j\omega_{c})}G_c{(j\omega_{c})}}$ = $1$ \\
+ Substituting $a = 24$ , $aK_c = 10$ in the above equation and solving for $\omega_c$ , we get \\
+ $\omega_c = 9 rad/sec $
+
+\item This implies For T,
+$\omega_c =\frac{1}{T\sqrt{a}}$ = 9 rad/sec which implies $\frac{1}{T}$ = 4.41 ,and \\
+ 
+ $K_c$ = $\frac{20}{2a}$ = 41.7\\ \\
+
+  After substituting the values of $K_c$, T , a we get  $G_c(s) = 41.7 \frac{s+4.41}{s + 18.4}$  
+ 
+\end{enumerate}  
+
+The compensated system is given by: \\ \\
+
+
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[auto, node distance=3cm,>=latex']
+    
+    \node [input, name=input] {};
+    \node [sum, right of=input] (sum) {};
+    \node [block, right of=sum] (controller) {$41.7\frac{s + 4.41}{s+18.4}$};
+    \node [block, right of=controller, node distance=3cm] (system) {$\frac{4}{s(s+2)}$};
+   
+    \draw [->] (controller) -- node[name=u] {$ $} (system);
+    \node [output, right of=system] (output) {};
+    \node [block, below of=u] (measurements) {1};
+
+    
+    \draw [draw,->] (input) -- node {$X(s)$} (sum);
+    \draw [->] (sum) -- node {$E(s)$} (controller);
+    \draw [->] (system) -- node [name=y] {$Y(s)$}(output);
+    \draw [->] (y) |- (measurements);
+    \draw [->] (measurements) -| node[pos=0.99] {$-$} 
+        node [near end] {$ $} (sum);
+
+\end{tikzpicture}
+
+The effect of the lead compensator is :
+
+\begin{itemize}
+  \item  Phase margin : from 17\degree to 50\degree which implies better transient response
+with less overshoot.
+  \item $\omega_c$ : from 6.3rad/sec to 9 rad/sec which implies the system response is
+faster.
+\item Gain margin remains $\infty$
+\item $K_v = 20$ as required , which is our acceptable steady-state response.
+\end{itemize}
+
+
+                        
+  
+\end{enumerate}
